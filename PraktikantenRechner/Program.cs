@@ -12,7 +12,7 @@ namespace ParktikantenCode
             char rechenzeichen;                                 //Variable für Rechenzeichen
             char cWiederholen;
 
-            while (true){
+            do {
                 Console.Write("Geben Sie die erste Zahl ein: ");    //Eingabeaufforderung ausgeben
                 zahl1 = Convert.ToDouble(Console.ReadLine());
 
@@ -41,9 +41,7 @@ namespace ParktikantenCode
                 Console.Write("Wollen Sie weiterechnen? (Y/N) ");
                 cWiederholen = Convert.ToChar(Console.ReadLine());
 
-                if ((cWiederholen != 'y') && (cWiederholen != 'Y'))
-                    break;
-            }
+            } while ((cWiederholen == 'y') || (cWiederholen == 'Y'));
         }
     }
 }
