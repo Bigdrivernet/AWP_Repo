@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PraktikantenRechner
+namespace DecBinUmrechner
 {
     class Program
     {
