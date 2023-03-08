@@ -6,7 +6,7 @@ namespace Anhalteweg
     {
         static void Main(string[] args)
         {
-            double dAnhalteweg, dAbstand, dGeschwindigkeit, dVerzoegerung = 0.0, dReaktion, dVAufprall, dReaktionsweg, dBremsweg;
+            double dAnhalteweg, dAbstand, dGeschwindigkeit, dVerzoegerung = 0.0, dReaktion, dVAufprall, dTAufprall, dReaktionsweg, dBremsweg;
             char cNochmal;
             string sAuswahl;
             
@@ -57,22 +57,25 @@ namespace Anhalteweg
                 }
                 } while (cNochmal == 'J');
 
-
+                // Anhalteweg berechnen
                 dReaktionsweg = dGeschwindigkeit * dReaktion;
                 dBremsweg = (double)Math.Pow(dGeschwindigkeit, 2) / (2 * dVerzoegerung);
 
                 dAnhalteweg = dReaktionsweg + dBremsweg;
 
-                dVAufprall = dGeschwindigkeit - dVerzoegerung * ((Math.Sqrt(2 * dVerzoegerung * (dAbstand - dReaktionsweg) + Math.Pow(dGeschwindigkeit, 2)) - dGeschwindigkeit) / dVerzoegerung);
-                dVAufprall = dVAufprall * 3.6;
-
+                // Zeit zwischen Aufprall und Nulldurchgang berechnen
+                dTAufprall = Math.Sqrt(2 * (dAnhalteweg - dAbstand) / dVerzoegerung);
+                // Vom Nulldurchgang Aufprallgeschwindigkeit zurückrechnen
+                dVAufprall = dVerzoegerung * dTAufprall * 3.6;
+                
+                // Augabe
                 Console.WriteLine($"Benötigter Anhalteweg: {dAnhalteweg:0.00} m");
 
                 if (dAnhalteweg < dAbstand) {
                     Console.WriteLine("Glück gehabt!");
                 } else {
                     Console.WriteLine("Es kam zum Unfall!");
-                    Console.WriteLine($"Die Aufprallgeschwindigkeit beträgt: {dVAufprall} km/h");
+                    Console.WriteLine($"Die Aufprallgeschwindigkeit beträgt: {dVAufprall:0.00} km/h");
                 }
 
                 Console.Write("Wollen Sie noch eine Berechnung durchführen? (j/n): ");
